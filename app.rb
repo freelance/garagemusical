@@ -19,7 +19,6 @@ class GaragemMusical < Sinatra::Base
   end
   
   get '/' do
-    
     mustache :index
   end
 
