@@ -3,7 +3,6 @@ require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/session'
 require 'mustache/sinatra'
-require 'mongomatic'
 
 require 'omniauth'
 
@@ -29,10 +28,7 @@ class GarageMusical < Sinatra::Base
     :views     => 'views/',
     :templates => 'templates/'
   }
-  
-  register Sinatra::Mongomatic
-  mongomatic Mongo::Connection.new.db("mongomatic_test")
-  
+
   register Sinatra::Session
   set :session_fail, '/login'
   set :session_secret, "omgomgsecret!"
