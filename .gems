@@ -3,3 +3,4 @@ omniauth
 sinatra-session
 mustache
 mongomatic
+bson_ext
