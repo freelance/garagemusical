@@ -1,4 +1,4 @@
-require 'omn.rb'
+#require 'omn.rb'
 require 'app.rb'
 
 #run Teste.new
