@@ -1,10 +1,13 @@
 require 'rubygems'
 
 require 'sinatra/base'
+require 'sinatra/base'
 require 'sinatra/session'
 require 'mustache/sinatra'
 
 require 'omniauth'
+
+require 'models/models.rb'
 
 class GarageMusical < Sinatra::Base
 

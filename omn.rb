@@ -1,19 +1,29 @@
 require 'rubygems'
+
 require 'sinatra/base'
-#require 'sinatra/session'
+require 'sinatra/session'
+require 'sinatra/mongomatic'
+
 require 'omniauth'
 require 'openid/store/filesystem'
-require 'sinatra/mongomatic'
-require 'models.rb'
+require 'uri'
+
+require './models/models.rb'
 
 class Teste < Sinatra::Base
   
   register Sinatra::Mongomatic
 
 #  mongomatic Mongo::Connection.new("localhost").db("RMU")
-  conn = Mongo::Connection.new('flame.mongohq.com', 27064)
-  conn.add_auth('RAM','rmu','unicorn')
-  Mongomatic.db = conn.db('RMU')
+# 
+# 
+  uri = URI.parse(ENV['MONGOHQ_URL'])
+  conn = Mongo::Connection.new(uri.host, uri.port)
+
+  db = conn.db(uri.path.gsub(/^\//, ''))
+  db.authenticate(uri.user, uri.password)
+
+  Mongomatic.db = db
 
 =begin
   puts User.empty?
@@ -59,21 +69,27 @@ class Teste < Sinatra::Base
       :secret => auth['credentials']['secret']
     )
     "
-    #{puts User.find( {'name' => 'Ben'} )}
-    <p></p><p></p>
     
-    <p>#{u.insert!}</p>
+    <p>#{u.insert}</p>
     
     #{auth['user_info']['name']}<br>
     #{auth['user_info']['nickname']}<br>
     #{auth['credentials']['token']}<br>
-    #{auth['credentials']['secret']}"
+    #{auth['credentials']['secret']}
+    
+        <p></p><p></p>
+    ---#{User.find( {'nick' => 'locks'} )}---
+
+    "
   end
-  
+
   get '/db' do
     cursor = User.find({'nick'=>'locks'})
 
-    cursor.inspect.to_s + cursor.next
+    html = ""
+    cursor.methods.each {|x| html<<"#{x}<br>" }
+
+    html.to_s
 #    User.find( {'nick' => 'locks' })
   end
 

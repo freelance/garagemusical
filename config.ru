@@ -1,5 +1,12 @@
-#require 'omn.rb'
-require 'app.rb'
+require 'rubygems'
+#require 'bundler'
 
-#run Teste.new
-run GarageMusical.new
+#Bundler.require
+
+require 'omn.rb'
+#require './app.rb'
+
+use Rack::ShowExceptions
+
+run Teste.new
+#run GarageMusical.new
