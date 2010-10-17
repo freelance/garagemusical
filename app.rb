@@ -3,7 +3,6 @@ require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/session'
 require 'mongomatic'
-require 'sinatra/mongomatic'
 require 'mustache/sinatra'
 
 require 'omniauth'
@@ -42,12 +41,12 @@ class GarageMusical < Sinatra::Base
 
   
   #-- database setup --#
-  register Sinatra::Mongomatic
+#  register Sinatra::Mongomatic
 
   conn = Mongo::Connection.new("flame.mongohq.com", 27064)
   conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
   
-  mongomatic conn.db("app318810")
+  Mongomatic.db = conn.db("app318810")
   #-^ database setup ^-#
 =begin
 =end
@@ -58,6 +57,7 @@ class GarageMusical < Sinatra::Base
     session!
 
     @session = session
+    @posts = Posting.find
     mustache :index
   end
 
@@ -70,25 +70,28 @@ class GarageMusical < Sinatra::Base
   get '/auth/:name/callback' do
     auth = request.env['rack.auth']
     
-    session_start!
-    session[:key]  = auth['credentials']['secret']
-    session[:nick] = auth['user_info']['nickname']
-    session[:name] = auth['user_info']['name']
-
-    User.create_indexes
-    begin
-      User.new(
+    user_id = User.find_one({:nick => session[:nick]})
+    if not user_id.nil?
+      user_id = User.new(
         :key  => session[:key],
         :nick => session[:nick],
         :name => session[:name]
-      ).insert!
-    rescue Exception => e
-      puts e
-    ensure
-      redirect '/'
+      ).insert
     end
+    
+    session_start!
+    session[:id] = user_id
 
-
+    redirect '/'
+  end
+  
+  post '/posting' do
+    Posting.new({
+      :title => params[:title],
+      :instrument => params[:instrument],
+      :body  => params[:body]
+    }).insert
+    
     redirect '/'
   end
   

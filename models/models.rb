@@ -2,7 +2,7 @@ class User < Mongomatic::Base
   include Mongomatic::Expectations::Helper
   
   def validate
-    self.errors << ["Name", "can't be empty"] if self["name"].blank?
+    self.errors << ["nick", "can't be empty"] if self["nick"].blank?
   end
   
   def self.create_indexes
@@ -18,9 +18,6 @@ class Posting < Mongomatic::Base
   include Mongomatic::Expectations::Helper
   
   def validate
-    expectations do
-      be_present self['title']
-    end
   end
 
 end

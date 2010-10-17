@@ -10,8 +10,6 @@ require './models/models.rb'
   
   Mongomatic.db = conn.db("app318810")
 
-
-# #   # or you can set it for a specific model:
   User.empty?
 
 =begin
@@ -28,7 +26,9 @@ puts  u.update
 puts  
 puts  found = User.find_one({"name" => "Ben Myles"})
 =end
-puts User.find.first["name"]
+puts User.new({:nick=>"john"}).insert
+puts "lol" if User.find_one( {:nick=>'greg'})#["_id"]
+puts User.find( {:nick=>'locks'}).first["_id"]
 
 =begin
 Posting.new({

@@ -11,15 +11,34 @@
   </p>
   
   <div style="float:left; width: 50%; background: yellow">
-  <p>
-    <a href="/">new posting</a>
-  </p>
+    <h2>new posting</h2>
+    
+    <form name="input" action="posting" method="POST">
+      <p>
+        <label for="title">title</label>
+        <input type="text" name="title" value="" id="title">
+        <br>
+
+        <label for="instrument">instrument</label>
+        <input type="text" name="instrument" value="" id="instrument">
+      </p>
+
+      <p>
+      <label for="body">body</label><textarea name="body" rows="8" cols="40"></textarea>
+      </p>
+      
+      <input type="submit" value="submit">
+    </form>
   </div>
+
   <div style="float:right; width: 50%; background: orange">
     {{#postings}}
-    <div style="background: blue;">
+    <div style="margin: 1em; background: grey;">
       title: {{title}}<br>
-      tags: {{tags}}<br>
+      tags: {{instrument}}
+      
+      <p>{{body}}</p>
+    
       
     </div>
     {{/postings}}

@@ -14,6 +14,16 @@ class GarageMusical
         @session[:name]
       end
       
+      def postings
+        @posts.to_a.each do |post|
+          {
+          :title => post["title"],
+          :body  => post["body"],
+          :instrument => post["instrument"]
+          }
+        end
+      end
+      
     end
   end
 end
