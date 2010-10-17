@@ -2,9 +2,10 @@ require 'rubygems'
 
 require 'sinatra/base'
 require 'sinatra/session'
-require 'mongomatic'
 require 'mustache/sinatra'
 
+require 'mongomatic'
+require 'uri'
 require 'omniauth'
 
 require 'models/models.rb'
@@ -42,15 +43,13 @@ class GarageMusical < Sinatra::Base
   #-- database setup --#
 #  register Sinatra::Mongomatic
 
-  conn = Mongo::Connection.new("flame.mongohq.com", 27064)
-  conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
-  
-  Mongomatic.db = conn.db("app318810")
+#  conn = Mongo::Connection.new("flame.mongohq.com", 27064)
+#  conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
+
+  uri = URI.parse( ENV['MONGOHQ_URL'] )
+  conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
+  Mongomatic.db = conn.db( uri.path.gsub(/^\//, '') )
   #-^ database setup ^-#
-=begin
-=end
-#  mongomatic Mongo::Connection.new("localhost").db("RMU")
-  #-^ database setup 2 ^-#
 
   get '/' do
     session!
