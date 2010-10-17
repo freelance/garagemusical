@@ -1,6 +1,6 @@
 sinatra
 omniauth
-sinatra-session
+sinatra-session --version 0.0.0
 mustache
 sinatra-mongomatic
 bson_ext
