@@ -6,7 +6,6 @@ require 'mongomatic'
 require 'mustache/sinatra'
 
 require 'omniauth'
-require 'quickedit'
 
 require 'models/models.rb'
 
