@@ -17,7 +17,7 @@ class GarageMusical < Sinatra::Base
     include Rack::Utils
     alias_method :h, :escape_html
   end
-  
+
   use OmniAuth::Builder do
     provider :twitter, 'ZrxnngDLk0AXdOy17ZVqxg', 'LB3ackpiT0fZo0wiVvT4kmVZk8LuyPKOoCx3aYxew'
   end
@@ -88,6 +88,7 @@ class GarageMusical < Sinatra::Base
       redirect '/'
     end
 
+
     redirect '/'
   end
   
@@ -95,7 +96,7 @@ class GarageMusical < Sinatra::Base
     session!
     @session = session
     
-    erb :profile
+    mustache :profile
   end
   
   get '/logout' do

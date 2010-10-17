@@ -9,7 +9,19 @@
   <a href="/profile">profile</a>
   <a href="/logout">log out</a>
   </p>
+  
+  <div style="float:left; width: 50%; background: yellow">
   <p>
     <a href="/">new posting</a>
   </p>
+  </div>
+  <div style="float:right; width: 50%; background: orange">
+    {{#postings}}
+    <div style="background: blue;">
+      title: {{title}}<br>
+      tags: {{tags}}<br>
+      
+    </div>
+    {{/postings}}
+  </div>
 </div>
