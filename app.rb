@@ -34,7 +34,7 @@ class GarageMusical < Sinatra::Base
 
   register Sinatra::Session
   set :session_fail, '/login'
-  set :session_secret, "lolyou!"
+  set :session_secret, "THIS SEKRIT, OK"
 
   
   #-- database setup --#
