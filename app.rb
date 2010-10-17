@@ -55,9 +55,7 @@ class GarageMusical < Sinatra::Base
 
   get '/' do
     session!
-  
-    puts @id = session[:id]
-    
+
     @user = User.find_one({"_id"=>session[:id]})
     @posts = Posting.find
     mustache :index
