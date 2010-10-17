@@ -21,9 +21,6 @@ class GarageMusical < Sinatra::Base
     provider :twitter, 'ZrxnngDLk0AXdOy17ZVqxg', 'LB3ackpiT0fZo0wiVvT4kmVZk8LuyPKOoCx3aYxew'
   end
   
-  use Quickedit
-  include Quickedit::Helpers
-  
   enable :sessions
   enable :run
   
@@ -43,12 +40,17 @@ class GarageMusical < Sinatra::Base
   #-- database setup --#
 #  register Sinatra::Mongomatic
 
-#  conn = Mongo::Connection.new("flame.mongohq.com", 27064)
-#  conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
 
-  uri = URI.parse( ENV['MONGOHQ_URL'] )
-  conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
-  Mongomatic.db = conn.db( uri.path.gsub(/^\//, '') )
+  if ENV['MONGOHQ_URL']
+    uri = URI.parse( ENV['MONGOHQ_URL'] )
+    conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
+    Mongomatic.db = conn.db( uri.path.gsub(/^\//, '') )
+  else
+    conn = Mongo::Connection.new("flame.mongohq.com", 27064)
+    conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
+    Mongomatic.db = conn.db("app318810")
+  end
+    
   #-^ database setup ^-#
 
   get '/' do
