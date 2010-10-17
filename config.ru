@@ -3,10 +3,8 @@ require 'rubygems'
 
 #Bundler.require
 
-require 'omn.rb'
-#require './app.rb'
+require './app.rb'
 
 use Rack::ShowExceptions
 
-run Teste.new
-#run GarageMusical.new
+run GarageMusical.new
