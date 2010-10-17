@@ -38,8 +38,7 @@ class GarageMusical < Sinatra::Base
 
   
   #-- database setup --#
-    #uri = URI.parse( ENV['MONGOHQ_URL'] )
-    puts ENV['MONGOHQ_URL']
+    uri = URI.parse ENV['MONGOHQ_URL']
     conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
     puts uri.to_s
     Mongomatic.db = conn.db( "app318810" )
