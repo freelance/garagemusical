@@ -34,12 +34,13 @@
   <div style="float:right; width: 50%; background: orange">
     {{#postings}}
     <div style="margin: 1em; background: grey;">
-      title: {{title}} ({{last_edit}})
+      <span style="background: black; color: grey">{{title}}</span>
       <br>
       tags: {{instrument}}
       
       <p>{{body}}</p>
     
+      <p>by {{creator}} @ {{last_edit}}
       
     </div>
     {{/postings}}
