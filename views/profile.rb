@@ -7,11 +7,19 @@ class GarageMusical
       end
       
       def nick
-        @session[:nick]
+        @user[:nick]
       end
       
       def name
-        @session[:name]
+        @user[:name]
+      end
+      
+      def postings
+        @postings.to_a.each do |post|
+          {
+            :creator => @user[:nick]
+          }
+        end
       end
       
     end

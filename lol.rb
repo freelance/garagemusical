@@ -26,8 +26,9 @@ puts  u.update
 puts  
 puts  found = User.find_one({"name" => "Ben Myles"})
 =end
-puts User.new({:nick=>"john"}).insert
-puts "lol" if User.find_one( {:nick=>'greg'})#["_id"]
+puts User.new(:nick=>"lols").insert, ""
+a = User.find_one( {:nick=>'greg'})
+puts a
 puts User.find( {:nick=>'locks'}).first["_id"]
 
 =begin

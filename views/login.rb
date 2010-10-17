@@ -7,12 +7,7 @@ class GarageMusical
       end
 
       def users
-        @entries.to_a.each do |entry|
-          {
-            :name => entry["name"],
-            :nick => entry["nick"]
-          }
-        end
+        @entries.to_a
       end
       
     end

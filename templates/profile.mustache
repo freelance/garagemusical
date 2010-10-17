@@ -1,6 +1,21 @@
-Hello
+<a href="/"><h1>GO BACK</h1></a>
 
 <div style="background:yellow">
 {{nick}}<br>
 {{name}}
 </div>
+
+{{#postings}}
+<div style="background: orange; margin: 1em;">
+
+<p>
+{{title}} (instrument: {{instrument}})
+</p>
+{{body}}
+<p>
+{{creator}} @ {{last_edit}}
+<p>
+
+<a href="/post/edit/{{id}}">edit this stuff</a>
+</div>
+{{/postings}}
