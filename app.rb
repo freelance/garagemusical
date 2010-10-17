@@ -1,11 +1,13 @@
 require 'rubygems'
 
 require 'sinatra/base'
-require 'sinatra/base'
 require 'sinatra/session'
+require 'mongomatic'
+require 'sinatra/mongomatic'
 require 'mustache/sinatra'
 
 require 'omniauth'
+require 'quickedit'
 
 require 'models/models.rb'
 
@@ -20,10 +22,12 @@ class GarageMusical < Sinatra::Base
     provider :twitter, 'ZrxnngDLk0AXdOy17ZVqxg', 'LB3ackpiT0fZo0wiVvT4kmVZk8LuyPKOoCx3aYxew'
   end
   
+  use Quickedit
+  include Quickedit::Helpers
+  
   enable :sessions
   enable :run
   
-  set :public, File.dirname(__FILE__) + "/public"
   register Mustache::Sinatra
   require 'views/layout'
 
@@ -34,8 +38,22 @@ class GarageMusical < Sinatra::Base
 
   register Sinatra::Session
   set :session_fail, '/login'
-  set :session_secret, "omgomgsecret!"
+  set :session_secret, "lolyou!"
+
   
+  #-- database setup --#
+  register Sinatra::Mongomatic
+
+  conn = Mongo::Connection.new("flame.mongohq.com", 27064)
+  conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
+  
+  mongomatic conn.db("app318810")
+  #-^ database setup ^-#
+=begin
+=end
+#  mongomatic Mongo::Connection.new("localhost").db("RMU")
+  #-^ database setup 2 ^-#
+
   get '/' do
     session!
 
@@ -44,6 +62,7 @@ class GarageMusical < Sinatra::Base
   end
 
   get '/login' do
+    @entries = User.find()
     
     mustache :login
   end
@@ -55,8 +74,28 @@ class GarageMusical < Sinatra::Base
     session[:key]  = auth['credentials']['secret']
     session[:nick] = auth['user_info']['nickname']
     session[:name] = auth['user_info']['name']
-    
+
+    User.create_indexes
+    begin
+      User.new(
+        :key  => session[:key],
+        :nick => session[:nick],
+        :name => session[:name]
+      ).insert!
+    rescue Exception => e
+      puts e
+    ensure
+      redirect '/'
+    end
+
     redirect '/'
+  end
+  
+  get '/profile' do
+    session!
+    @session = session
+    
+    erb :profile
   end
   
   get '/logout' do

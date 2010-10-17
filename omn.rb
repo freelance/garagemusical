@@ -17,13 +17,17 @@ class Teste < Sinatra::Base
 #  mongomatic Mongo::Connection.new("localhost").db("RMU")
 # 
 # 
+if ENV['MONGOHQ_URL']
   uri = URI.parse(ENV['MONGOHQ_URL'])
-  conn = Mongo::Connection.new(uri.host, uri.port)
+  conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
 
-  db = conn.db(uri.path.gsub(/^\//, ''))
-  db.authenticate(uri.user, uri.password)
-
-  Mongomatic.db = db
+  mongomatic conn.db(uri.path.gsub(/^\//, ''))
+else
+  conn = Mongo::Connection.new("flame.mongohq.com", 27064)
+  conn.authenticate("app318810","d6vqgr76urvopntbvyodrg")
+  
+  Mongomatic.db = conn.db("app318810")
+end
 
 =begin
   puts User.empty?

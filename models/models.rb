@@ -15,4 +15,12 @@ class User < Mongomatic::Base
 end
 
 class Posting < Mongomatic::Base
+  include Mongomatic::Expectations::Helper
+  
+  def validate
+    expectations do
+      be_present self['title']
+    end
+  end
+
 end
