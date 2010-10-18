@@ -26,10 +26,16 @@ puts  u.update
 puts  
 puts  found = User.find_one({"name" => "Ben Myles"})
 =end
-puts User.new(:nick=>"lals").insert.inspect, ""
+#puts User.find_one( {:nick=>'greg'})
 
-puts User.find_one( {:nick=>'greg'})
-puts User.find_one( {:nick=>'lols'})["_id"].to_s
+a = User.find_one( {:nick=>'locks'} )
+puts a["_id"].inspect,""
+
+b = Posting.find_one( {:creator => a["_id"]} )
+puts b.inspect
+puts
+puts c = User.find_one( {:_id => b[""]})
+puts "post by #{User.find_one( {:_id => b["creator"] })[:name]}"
 
 =begin
 Posting.new({
