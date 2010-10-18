@@ -49,8 +49,10 @@ class GarageMusical < Sinatra::Base
 
   get '/' do
     session!
+    
+    puts "","","","",session[:id],session[:id].inspect,session[:id].to_s.class,"","","",""
 
-    @user = User.find_one({"_id"=>session[:id]})
+    puts "",@user = User.find_one({"_id"=>session[:id]})
     @posts = Posting.find
 
     mustache :index
@@ -64,20 +66,15 @@ class GarageMusical < Sinatra::Base
   
   get '/auth/:name/callback' do
     auth = request.env['rack.auth']
-
-    user_id = User.find_one( {:nick => auth['user_info']['nickname']} )
-
-    if user_id.nil?
-      user_id = User.new(
+    
+    User.new(
         :key  => auth['credentials']['secret'],
         :nick => auth['user_info']['nickname'],
         :name => auth['user_info']['name']
-      ).insert
-      
-    end
+    ).insert
 
     session_start!
-    session[:id] = user_id
+    session[:id] = User.find_one( {:nick => auth['user_info']['nickname']} )["_id"]
 
     redirect '/'
   end

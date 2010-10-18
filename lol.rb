@@ -26,10 +26,10 @@ puts  u.update
 puts  
 puts  found = User.find_one({"name" => "Ben Myles"})
 =end
-puts User.new(:nick=>"lols").insert, ""
-a = User.find_one( {:nick=>'greg'})
-puts a
-puts User.find( {:nick=>'locks'}).first["_id"]
+puts User.new(:nick=>"lals").insert.inspect, ""
+
+puts User.find_one( {:nick=>'greg'})
+puts User.find_one( {:nick=>'lols'})["_id"].to_s
 
 =begin
 Posting.new({
@@ -38,5 +38,3 @@ Posting.new({
   :instrument => [:keyboard]
 }).insert
 =end
-
-Posting.find({"instrument" => "keyboard"}).each {|x| puts x["title"] }

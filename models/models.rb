@@ -21,6 +21,3 @@ class Posting < Mongomatic::Base
   end
 
 end
-
-class Person < Mongomatic::Base
-end
