@@ -3,6 +3,7 @@ require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/session'
 require 'mustache/sinatra'
+require 'sinatra/rest'
 
 require 'mongomatic'
 require 'uri'
@@ -40,9 +41,10 @@ class GarageMusical < Sinatra::Base
   #-- database setup --#
     uri = URI.parse ENV['MONGOHQ_URL']
     conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
-    puts uri.to_s
-    Mongomatic.db = conn.db( "app318810" )
+
+    Mongomatic.db = conn.db( uri.path.gsub(/^\//, "") )
   #-^ database setup ^-#
+  # 
 
   get '/' do
     session!
@@ -62,17 +64,19 @@ class GarageMusical < Sinatra::Base
   get '/auth/:name/callback' do
     auth = request.env['rack.auth']
 
-    user_id = User.find_one({:nick => auth['user_info']['nickname']})
+    user_id = User.find_one( {:nick => auth['user_info']['nickname']} )
+
     if user_id.nil?
       user_id = User.new(
         :key  => auth['credentials']['secret'],
         :nick => auth['user_info']['nickname'],
         :name => auth['user_info']['name']
       ).insert
+      
     end
-    
+
     session_start!
-    session[:id] = user_id["_id"]
+    session[:id] = user_id
 
     redirect '/'
   end
