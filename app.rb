@@ -16,6 +16,8 @@ class GarageMusical < Sinatra::Base
     include Rack::Utils
     alias_method :h, :escape_html
   end
+  
+  set :public, File.dirname(__FILE__) + '/public'
 
   use OmniAuth::Builder do
     provider :twitter, 'ZrxnngDLk0AXdOy17ZVqxg', 'LB3ackpiT0fZo0wiVvT4kmVZk8LuyPKOoCx3aYxew'
