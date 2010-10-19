@@ -21,11 +21,8 @@ class Posting < Mongomatic::Base
   end
   
   def creator_nick
-    User.find_one( {:_id => self[:creator]} )[:nick]
-  end
-  
-  def creator
-    User.find_one( {:_id => self[:creator]} )[:nick]
+    creator = User.find_one( {:_id => self[:creator]} )
+    creator.nil? ? nil : creator[:nick]
   end
 
 end
