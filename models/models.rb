@@ -19,5 +19,13 @@ class Posting < Mongomatic::Base
   
   def validate
   end
+  
+  def creator_nick
+    User.find_one( {:_id => self[:creator]} )[:nick]
+  end
+  
+  def creator
+    User.find_one( {:_id => self[:creator]} )[:nick]
+  end
 
 end

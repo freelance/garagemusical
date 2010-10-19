@@ -15,9 +15,11 @@ class GarageMusical
       end
       
       def postings
-        @posts.to_a
+        @posts.to_a.each do |post|
+          post[:creator] = post.creator_nick
+        end
       end
-      
+
     end
   end
 end

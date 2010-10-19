@@ -35,7 +35,7 @@ b = Posting.find_one( {:creator => a["_id"]} )
 puts b.inspect
 puts
 puts c = User.find_one( {:_id => b[""]})
-puts "post by #{User.find_one( {:_id => b["creator"] })[:name]}"
+puts "post by #{User.find_one( {:_id => b[:creator] })[:name]}"
 
 =begin
 Posting.new({
