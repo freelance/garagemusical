@@ -1,0 +1,32 @@
+.section {
+  margin:  1em;
+  padding: 1em;
+  border-radius: 20px;
+
+  background: #dddddd;
+
+  text-align: left;  
+}
+.section h2 {
+  padding: 0;
+  margin:  0;
+  border:  0;
+}
+
+.section img {
+  width:  100%;
+}
+
+#left {
+  float: left;
+  clear: none;
+
+  width: 60%;
+}
+
+#right {
+  float: right;
+  clear: none;
+
+  width: 40%;
+}

@@ -1,10 +1,45 @@
-<h1>Welcome to GarageMusical</h1>
-<h2>the place for all musicians.</h2>
+<div id="left">
+  <div class="section">
+    <h2>About Us</h2>
+  
+    <p>
+      This site is for every musicians looking to connect to other musicians.
+    </p>
+    <p>
+      Here you will be able to both post classifieds offering your musical services or looking for other members to play with, and later perused posts made by others.
+    </p>
+  </div>
 
-<p><a href='/auth/twitter'>
-  <img src="/sign-in-with-twitter-l.png" alt="Sign in with Twitter">
-</a></p>
+  <div class="section">
+    <h2>Features</h2>
+  
+    <ul>
+      <li>No login necessary to browse classifieds</li>
+      <li>Login using twitter (more services to come)</li>
+      <li>Easily manage different band classifieds with profiles</li>
+      <li>Browse classifieds easily with search and filtering</li>
+    </ul>
+  </div>
+  
+  <div class="section">
+    <h2>Screenshots</h2>
+    <br>
+    <img src="/screenshot.png">
+  </div>
+</div>
 
-{{#users}}
-<p>{{name}} : {{nick}}</p>
-{{/users}}
+<div id="right">
+  <h2>BROWSE STUFF HERE</h2>
+  
+  or
+  
+  <h2>SIGN IN TO POST AND REPLY</h2>
+
+  <p><a href='/auth/twitter'>
+    <img src="/sign-in-with-twitter-l.png" alt="Sign in with Twitter">
+  </a></p>
+
+  {{#users}}
+  <p>{{name}} : {{nick}}</p>
+  {{/users}}
+</div>
