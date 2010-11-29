@@ -1,13 +1,9 @@
-<h1>Welcome to <strong>G</strong>arage<strong>M</strong>usical</h1>
-
-<p>You are: {{nick}} (aka {{name}})</p>
-
-
 <div id="menu">
   <p>
-  <a href="/">home</a>
-  <a href="/profile">profile</a>
-  <a href="/logout">log out</a>
+    <strong>{{nick}}</strong>
+    <a href="/">home</a>
+    <a href="/profile">profile</a>
+    <a href="/logout">log out</a>
   </p>
   
   <div style="float:left; width: 50%; background: yellow">
@@ -24,7 +20,8 @@
       </p>
 
       <p>
-      <label for="body">body</label><textarea name="body" rows="8" cols="40"></textarea>
+        <label for="body">body</label>
+        <textarea name="body" rows="8" cols="40"></textarea>
       </p>
       
       <input type="submit" value="submit">

@@ -11,6 +11,10 @@ class User < Mongomatic::Base
   def self.drop_indexes
     collection.drop_indexes
   end
+  
+  def add_profile(profile)
+    self.push("profile_id", profile["_id"])
+  end
 
 end
 

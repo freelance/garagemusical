@@ -8,6 +8,7 @@ require 'mongomatic'
 require 'uri'
 require 'omniauth'
 
+require 'lol.rb'
 require 'models/models.rb'
 
 class GarageMusical < Sinatra::Base
@@ -40,10 +41,13 @@ class GarageMusical < Sinatra::Base
 
   
   #-- database setup --#
-    uri = URI.parse ENV['MONGOHQ_URL']
+=begin
+    uri  = URI.parse ENV['MONGOHQ_URL']
     conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
 
     Mongomatic.db = conn.db( uri.path.gsub(/^\//, "") )
+=end
+    init_db()
   #-^ database setup ^-#
   # 
 

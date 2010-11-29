@@ -5,14 +5,17 @@ require 'uri'
 require './models/models.rb'
 
   # set the db for all models
+def init_db
   conn = Mongo::Connection.new("flame.mongohq.com", 27064)
   conn.db("app318810").authenticate("app318810","d6vqgr76urvopntbvyodrg")
   
   Mongomatic.db = conn.db("app318810")
+end
 
-  User.empty?
 
 =begin
+  User.empty?
+
 puts  u = User.new(:name => "Ben")
 puts  u.valid?
 puts  u["email"] = "me@somewhere.com"
@@ -25,8 +28,8 @@ puts  u["name"] = "Ben Myles"
 puts  u.update
 puts  
 puts  found = User.find_one({"name" => "Ben Myles"})
-=end
-#puts User.find_one( {:nick=>'greg'})
+
+puts User.find_one( {:nick=>'greg'})
 
 a = User.find_one( {:nick=>'locks'} )
 puts a["_id"].inspect,""
