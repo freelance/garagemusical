@@ -1,10 +1,15 @@
-<h1>Welcome to GarageMusical</h1>
-<h2>the place for all musicians.</h2>
-
-<p><a href='/auth/twitter'>
-  <img src="sign-in-with-twitter-l.png" alt="Sign in with Twitter">
-</a></p>
-
-{{#users}}
-<p>{{name}} : {{nick}}</p>
-{{/users}}
+<form>
+  <p>
+    <label for="title">name</label>
+    <input type="text" name="title" value="{{{title}}}">
+  </p>
+  
+  <p>
+    <label for="instrument">type</label>
+    <input type="text" name="instrument" value="{{instrument}}">
+  </p>
+  
+  <p>
+    <label for="body">body</label>
+    <input type="text" name="body" value="{{body}}">
+</form>

@@ -41,9 +41,8 @@ class GarageMusical < Sinatra::Base
 
   
   #-- database setup --#
-  init_db
+    init_db()
   #-^ database setup ^-#
-  # 
 
   get '/' do
     session!

@@ -5,17 +5,29 @@
 {{name}}
 </div>
 
-{{#postings}}
-<div style="background: orange; margin: 1em;">
-
-<p>
-{{title}} (instrument: {{instrument}})
-</p>
-{{body}}
-<p>
-{{creator}} @ {{last_edit}}
-<p>
-
-<a href="/post/edit/{{id}}">edit this stuff</a>
+<div style="float: left; background: red; width: 50%">
+  <h2>Profiles</h2>
+  
+  <a href="#">new profile</a>
+  
+  {{#profiles}}
+    <div style="background: grey; margin: 1em;">
+      {{type}}
+      {{name}}
+    </div>
+  {{/profiles}}
 </div>
-{{/postings}}
+
+<div style="float: right; background: orange; width: 50%;">
+  <h2>Posts</h2>
+
+  {{#postings}}
+  <div style="background: grey; margin: 1em;">
+    <p>{{title}} (instrument: {{instrument}})</p>
+    {{body}}
+    <p>{{creator}} @ {{last_edit}}<p>
+
+    <a href="/post/edit/{{_id}}">edit this stuff</a>
+  </div>
+  {{/postings}}
+</div>
