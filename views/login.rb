@@ -7,7 +7,7 @@ class GarageMusical
       end
 
       def users
-        @entries.to_a
+        @entries.to_a.first(10)
       end
       
     end

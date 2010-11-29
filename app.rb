@@ -8,6 +8,7 @@ require 'mongomatic'
 require 'uri'
 require 'omniauth'
 
+require 'lol.rb'
 require 'models/models.rb'
 
 class GarageMusical < Sinatra::Base
@@ -40,10 +41,7 @@ class GarageMusical < Sinatra::Base
 
   
   #-- database setup --#
-    uri = URI.parse ENV['MONGOHQ_URL']
-    conn = Mongo::Connection.from_uri( ENV['MONGOHQ_URL'] )
-
-    Mongomatic.db = conn.db( uri.path.gsub(/^\//, "") )
+  init_db
   #-^ database setup ^-#
   # 
 
@@ -96,6 +94,9 @@ class GarageMusical < Sinatra::Base
 
     mustache :profile
   end
+  get '/profile/new' do
+    
+  end
   
   get '/logout' do
     session_end!
@@ -104,8 +105,11 @@ class GarageMusical < Sinatra::Base
   end
   
   get '/post/edit/:id' do
-    @posting = Posting.find_one({"_id"=>params[:id]})
-    
+    session!
+
+    id = BSON::ObjectId(params[:id])
+    @post = Posting.find_one({ "_id" => id })
+
     mustache :edit_post
   end
 

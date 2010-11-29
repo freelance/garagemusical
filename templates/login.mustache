@@ -30,8 +30,11 @@
 
 <div id="right">
   <h2>BROWSE STUFF HERE</h2>
+  <a href="#">Listing</a>
   
-  or
+  <p>
+    or
+  </p>
   
   <h2>SIGN IN TO POST AND REPLY</h2>
 
@@ -39,7 +42,8 @@
     <img src="/sign-in-with-twitter-l.png" alt="Sign in with Twitter">
   </a></p>
 
+  <h3>Here's some people who already registered with us</h3>
   {{#users}}
-  <p>{{name}} : {{nick}}</p>
+    <p>{{name}}</p>
   {{/users}}
 </div>
