@@ -1,3 +1,11 @@
+#menu p {
+  margin: 0.5em;
+}
+#menu li {
+  display: inline;
+  margin: 0 4em;
+}
+
 .section {
   margin:  1em;
   padding: 1em;
