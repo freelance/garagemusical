@@ -28,5 +28,21 @@ class Posting < Mongomatic::Base
     creator = User.find_one( {:_id => self[:creator]} )
     creator.nil? ? nil : creator[:nick]
   end
+  
+  def add_reply
+    self.inc("replies", 1)
+  end
+
+  def before_insert
+    self["last_edit"] = Time.now
+  end
+
+end
+
+class Reply < Mongomatic::Base
+  include Mongomatic::Expectations::Helper
+  
+  def validate
+  end
 
 end

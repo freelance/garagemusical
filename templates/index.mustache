@@ -30,14 +30,15 @@
   </form>
 </div>
 
-<div style="float:right; width: 50%; background: orange">
+<div style="float:right; width: 50%;">
   {{#postings}}
-  <div style="margin: 1em; background: grey;">
+  <div style="margin: 1em; padding: 0.5em; background: grey; border-radius: 10px;">
     <div style="float: left">
+      {{replies}}<br>
       <a href="/reply/{{_id}}">reply</a>
     </div>
 
-    <span style="background: black; color: grey">{{title}}</span>
+    <span style="background: black; color: grey; width: 100%">{{title}}</span>
     <br>
     tags: {{instrument}}
     

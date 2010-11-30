@@ -6,11 +6,11 @@
 </div>
 <hr>
   
-<div style="float:left; width: 50%; background: yellow">
+<div style="float:left; width: 50%;">
   {{#postings_left}}
-  <div style="margin: 1em; background: grey;">
-    <span style="background: black; color: grey">{{title}}</span>
-    <br>
+  <div style="padding: 1em; margin: 1em; background: grey; border-radius: 10px">
+    {{title}}
+    <hr style="width: 50%">
     tags: {{instrument}}
     
     <p>{{body}}</p>
@@ -20,11 +20,11 @@
   {{/postings_left}}
 </div>
 
-<div style="float:right; width: 50%; background: orange">
+<div style="float:right; width: 50%;">
   {{#postings_right}}
-  <div style="margin: 1em; background: grey;">
-    <span style="background: black; color: grey">{{title}}</span>
-    <br>
+  <div style="padding: 1em; margin: 1em; background: grey; border-radius: 10px;">
+    {{title}}
+    <hr style="width: 50%">
     tags: {{instrument}}
     
     <p>{{body}}</p>

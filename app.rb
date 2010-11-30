@@ -54,8 +54,11 @@ class GarageMusical < Sinatra::Base
   end
   
   get '/reply/:id' do
-    id = BSON::ObjectId(params[:id])
-    post = Posting.find_one({"_id" => id})
+    post_id = BSON::ObjectId(params[:id])
+    post    = Posting.find_one({"_id" => post_id})
+    
+    replier_id = session[:id]
+    creator = User.find_one({"_id" => post['creator']})
     
     
     <<-HTML
@@ -64,17 +67,31 @@ class GarageMusical < Sinatra::Base
     <p>
       title: #{post['title']}<br>
       body: #{post[:body]}<br>
-      creator: #{User.find_one({"_id"=>post['creator']})[:name]} @ #{post[:last_edit]}
+      creator: #{creator[:name]} @ #{post[:last_edit]}
     </p>
 
-      <form action="/reply/:id" method="POST">
+      <form action="/reply" method="POST">
+        <input type="hidden" name="post" value="#{post_id}" id="post">
+        <input type="hidden" name="replier" value="#{replier_id}" id="replier">
+        <input type="hidden" name="timestamp" value="#{Time.now}" id="timestamp">
         <textarea rows="10" cols="30" type="textarea" name="response">I am interested in this classified.</textarea>
         <input type="submit" value="reply">
       </form>
       </div>
     HTML
   end
-  post '/reply/:id' do
+  post '/reply' do
+    post = Posting.find_one({"_id" => BSON::ObjectId(params[:post])})
+    post.add_reply
+    
+    reply = Reply.new(
+      :post     => params[:post],
+      :replier  => params[:replier],
+      :response => params[:response],
+      :time     => params[:timestamp]
+    ).insert
+        
+    redirect '/'
   end
   
   get '/temp' do
@@ -109,7 +126,6 @@ class GarageMusical < Sinatra::Base
       :title      => params[:title],
       :instrument => params[:instrument],
       :body       => params[:body],
-      :last_edit  => Time.now,
       :creator    => session[:id]
     }).insert
     
