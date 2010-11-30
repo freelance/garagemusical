@@ -29,21 +29,20 @@
 </div>
 
 <div id="right">
-  <h2>BROWSE STUFF HERE</h2>
-  <a href="#">Listing</a>
+  <h2><a href="temp">BROWSE HERE</a></h2>
   
   <p>
     or
   </p>
-  
-  <h2>SIGN IN TO POST AND REPLY</h2>
 
-  <p><a href='/auth/twitter'>
-    <img src="/sign-in-with-twitter-l.png" alt="Sign in with Twitter">
-  </a></p>
+  <p>
+    <a href='/auth/twitter'><img src="/sign-in-with-twitter-l.png" alt="Sign in with Twitter"></a> to post and reply
+  </p>
 
-  <h3>Here's some people who already registered with us</h3>
-  {{#users}}
-    <p>{{name}}</p>
-  {{/users}}
+  <p style="padding-top: 2em;">
+    <h3>Here's some people who already registered with us</h3>
+    {{#users}}
+      <p>{{name}}</p>
+    {{/users}}
+  </p>
 </div>

@@ -48,9 +48,39 @@ class GarageMusical < Sinatra::Base
     session!
     
     @user = User.find_one({"_id"=>session[:id]})
-    @posts = Posting.find
+    @posts = Posting.all
 
     mustache :index
+  end
+  
+  get '/reply/:id' do
+    id = BSON::ObjectId(params[:id])
+    post = Posting.find_one({"_id" => id})
+    
+    
+    <<-HTML
+    <a href="/">back</a>
+
+    <p>
+      title: #{post['title']}<br>
+      body: #{post[:body]}<br>
+      creator: #{User.find_one({"_id"=>post['creator']})[:name]} @ #{post[:last_edit]}
+    </p>
+
+      <form action="/reply/:id" method="POST">
+        <textarea rows="10" cols="30" type="textarea" name="response">I am interested in this classified.</textarea>
+        <input type="submit" value="reply">
+      </form>
+      </div>
+    HTML
+  end
+  post '/reply/:id' do
+  end
+  
+  get '/temp' do
+    @posts = Posting.all.to_a
+
+    mustache :temp
   end
 
   get '/login' do

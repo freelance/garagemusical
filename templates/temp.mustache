@@ -1,0 +1,35 @@
+<div id="menu">
+  <ul>
+    <li><a href="/">home</a></li>
+    <li><a href='/auth/twitter'><img src="/sign-in-with-twitter-l.png" alt="Sign in with Twitter"></a></li>
+  </ul>
+</div>
+<hr>
+  
+<div style="float:left; width: 50%; background: yellow">
+  {{#postings_left}}
+  <div style="margin: 1em; background: grey;">
+    <span style="background: black; color: grey">{{title}}</span>
+    <br>
+    tags: {{instrument}}
+    
+    <p>{{body}}</p>
+  
+    <strong>{{creator}}</strong> @ {{last_edit}}
+  </div>
+  {{/postings_left}}
+</div>
+
+<div style="float:right; width: 50%; background: orange">
+  {{#postings_right}}
+  <div style="margin: 1em; background: grey;">
+    <span style="background: black; color: grey">{{title}}</span>
+    <br>
+    tags: {{instrument}}
+    
+    <p>{{body}}</p>
+  
+    <strong>{{creator}}</strong> @ {{last_edit}}
+  </div>
+  {{/postings_right}}
+</div>

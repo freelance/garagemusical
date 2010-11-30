@@ -1,6 +1,6 @@
 <div id="menu">
   <ul>
-    <li><strong>{{nick}}</strong></li>
+    <li><strong>hi {{name}}</strong></li>
     <li><a href="/">home</a></li>
     <li><a href="/profile">profile</a></li>
     <li><a href="/logout">log out</a></li>
@@ -33,6 +33,10 @@
 <div style="float:right; width: 50%; background: orange">
   {{#postings}}
   <div style="margin: 1em; background: grey;">
+    <div style="float: left">
+      <a href="/reply/{{_id}}">reply</a>
+    </div>
+
     <span style="background: black; color: grey">{{title}}</span>
     <br>
     tags: {{instrument}}
