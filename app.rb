@@ -48,7 +48,9 @@ class GarageMusical < Sinatra::Base
     session!
     
     @user = User.find_one({"_id"=>session[:id]})
-    @posts = Posting.all
+
+    @self_posts = Posting.find_one({"creator"=>session[:id]}).to_a
+    @posts = Posting.all.to_a
 
     mustache :index
   end

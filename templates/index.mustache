@@ -29,7 +29,24 @@
     <input type="submit" value="submit">
   </form>
   
+  <h2>your posts</h2>
   {{#self_posts}}
+  <div style="margin: 1em; padding: 0.5em; background: grey; border-radius: 10px">
+    <a href="#">
+    <div style="float: left; padding: 5px; background: #aaaaaa; border-radius: 5px;">
+        {{replies}}<br>
+        replies
+    </div>
+    </a>
+
+    <span style="background: black; color: grey; width: 100%">{{title}}</span>
+    <br>
+    tags: {{instrument}}
+    
+    <p>{{body}}</p>
+  
+    <strong>{{creator}}</strong> @ {{last_edit}}
+  </div>
   {{/self_posts}}
 </div>
 
