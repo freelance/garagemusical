@@ -14,6 +14,15 @@ class GarageMusical
         @user['name']
       end
       
+      def self_posts
+        posts = Posting.find({"creator" => BSON::ObjectId(session[:id])})
+
+        posts.to_a.each do |post|
+          post[:creator] = "You"
+        end
+
+      end
+      
       def postings
         @posts.to_a.each do |post|
           post[:creator] = post.creator_nick
