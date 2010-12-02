@@ -8,7 +8,7 @@ require 'mongomatic'
 require 'uri'
 require 'omniauth'
 
-require 'lol.rb'
+require 'setup.rb' # init_auth and init_db
 require 'models/models.rb'
 
 class GarageMusical < Sinatra::Base
@@ -20,9 +20,9 @@ class GarageMusical < Sinatra::Base
   
   set :public, File.dirname(__FILE__) + '/public'
 
-  use OmniAuth::Builder do
-    provider :twitter, 'ZrxnngDLk0AXdOy17ZVqxg', 'LB3ackpiT0fZo0wiVvT4kmVZk8LuyPKOoCx3aYxew'
-  end
+  #-- setup auth --#
+  init_auth()
+  #-^ setup auth ^-#
   
   enable :sessions
   enable :run
@@ -41,7 +41,7 @@ class GarageMusical < Sinatra::Base
 
   
   #-- database setup --#
-    init_db()
+  init_db()
   #-^ database setup ^-#
 
   get '/' do
@@ -49,7 +49,7 @@ class GarageMusical < Sinatra::Base
     
     @user = User.find_one({"_id"=>session[:id]})
 
-    @self_posts = Posting.find_one({"creator"=>session[:id]}).to_a
+    @self_posts = Posting.find({"creator"=>session[:id]}).to_a
     @posts = Posting.all.to_a
 
     mustache :index
@@ -96,10 +96,10 @@ class GarageMusical < Sinatra::Base
     redirect '/'
   end
   
-  get '/temp' do
+  get '/browse' do
     @posts = Posting.all.to_a
 
-    mustache :temp
+    mustache :browse
   end
 
   get '/login' do
