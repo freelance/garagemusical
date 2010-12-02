@@ -1,6 +1,6 @@
 class GarageMusical
   module Views
-    class Temp < Layout
+    class Browse < Layout
       
       def hello
         "temp.rb"

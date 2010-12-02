@@ -5,10 +5,26 @@
   </ul>
 </div>
 <hr>
+
+<style>
+#left {
+  float: left;
+}
+
+.post {
+  padding: 1em;
+  margin:  1em;
+
+  border-radius: 10px;
+
+  background: grey;
+
+}
+</style>
   
-<div style="float:left; width: 50%;">
+div style="float:left; width: 50%;">
   {{#postings_left}}
-  <div style="padding: 1em; margin: 1em; background: grey; border-radius: 10px">
+  <div class="post">
     {{title}}
     <hr style="width: 50%">
     tags: {{instrument}}
@@ -22,7 +38,7 @@
 
 <div style="float:right; width: 50%;">
   {{#postings_right}}
-  <div style="padding: 1em; margin: 1em; background: grey; border-radius: 10px;">
+  <div class="post">
     {{title}}
     <hr style="width: 50%">
     tags: {{instrument}}
